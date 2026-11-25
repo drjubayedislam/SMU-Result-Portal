@@ -4,879 +4,167 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SMU Result Card Generator</title>
-
 <style>
 *{box-sizing:border-box}
-
-body{
-  margin:0;
-  padding:12px;
-  background:#f2f4f8;
-  font-family:Arial,sans-serif;
-  color:#10234b;
-}
-
-.form-container{
-  max-width:650px;
-  margin:15px auto;
-  padding:20px;
-  background:white;
-  border-radius:10px;
-  box-shadow:0 2px 12px #0002;
-}
-
+body{margin:0;padding:12px;background:#f2f4f8;font-family:Arial,sans-serif;color:#10234b}
+.form-container{max-width:650px;margin:15px auto;padding:20px;background:white;border-radius:10px;box-shadow:0 2px 12px #0002}
 h1{text-align:center;color:#073477}
-
-label{
-  display:block;
-  font-weight:bold;
-  margin:12px 0 6px;
-}
-
-input,select{
-  width:100%;
-  padding:11px;
-  border:1px solid #bdc9dc;
-  border-radius:5px;
-  font-size:16px;
-  background:white;
-}
-
-.hons-options{
-  display:flex;
-  flex-wrap:wrap;
-  gap:12px;
-}
-
-.hons-options label{
-  display:flex;
-  align-items:center;
-  gap:5px;
-  font-weight:normal;
-}
-
+label{display:block;font-weight:bold;margin:12px 0 6px}
+input,select{display:block;width:100%;padding:11px;border:1px solid #bdc9dc;border-radius:5px;font-size:16px;background:white}
+.hons-options{display:flex;flex-wrap:wrap;gap:12px}
+.hons-options label{display:flex;align-items:center;gap:5px;font-weight:normal}
 .hons-options input{width:auto}
-
-button{
-  width:100%;
-  padding:12px;
-  margin-top:15px;
-  border:0;
-  border-radius:5px;
-  background:#073477;
-  color:white;
-  font-size:16px;
-  cursor:pointer;
-}
-
+button{width:100%;padding:12px;margin-top:15px;border:0;border-radius:5px;background:#073477;color:white;font-size:16px;cursor:pointer}
 button:active{opacity:.8}
-
-.developer-credit{
-  max-width:650px;
-  margin:0 auto 20px;
-  text-align:center;
-  font-family:Arial,sans-serif;
-  font-size:12px;
-  color:#667085;
-}
-
-/* RESULT CARD */
-
-#result{
-  display:none;
-  max-width:650px;
-  margin:20px auto;
-  background:white;
-  padding:15px;
-  border:1px solid #ddd;
-  overflow:hidden;
-}
-
-.university-header{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:15px;
-  padding:5px 0 14px;
-}
-
-.logo{
-  width:85px;
-  height:85px;
-  object-fit:contain;
-  flex-shrink:0;
-}
-
-.university-name{
-  border-left:2px solid #263f78;
-  padding-left:15px;
-  color:#073477;
-  font-family:Georgia,serif;
-  font-size:clamp(22px,4.5vw,34px);
-  font-weight:bold;
-  line-height:1.1;
-}
-
-.navbar{
-  background:#073477;
-  height:38px;
-  display:flex;
-  align-items:center;
-  padding-left:15px;
-  border-radius:5px;
-  margin:3px 0 15px;
-}
-
-.menu{
-  color:white;
-  font-size:24px;
-}
-
-.result-title{
-  text-align:center;
-  color:#073477;
-  font-size:29px;
-  margin:12px 0;
-}
-
-.exam-title{
-  text-align:center;
-  font-size:clamp(14px,2.8vw,19px);
-  line-height:1.35;
-  margin:0 0 12px;
-}
-
-.line{
-  border-bottom:3px solid #173e7e;
-  margin:12px 0 20px;
-}
-
-table{
-  width:100%;
-  border-collapse:collapse;
-  font-size:13px;
-}
-
-td,th{
-  border:1px solid #c4ccda;
-  padding:9px;
-  text-align:left;
-  vertical-align:middle;
-}
-
-td:first-child{
-  font-weight:bold;
-  width:48%;
-}
-
-.subject-section{
-  display:grid;
-  grid-template-columns:2fr 1.2fr;
-  margin-top:22px;
-  border:1px solid #c4ccda;
-  break-inside:avoid;
-  page-break-inside:avoid;
-}
-
-.subject-table{
-  border:none;
-}
-
+.developer-credit{max-width:650px;margin:0 auto 20px;text-align:center;font-size:12px;color:#667085}
+#result{display:none;position:relative;isolation:isolate;max-width:650px;margin:20px auto;background:white;padding:15px;border:1px solid #ddd;overflow:hidden}
+#result::before{content:"SAMPLE • NOT OFFICIAL";position:absolute;z-index:5;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-35deg);font-size:clamp(30px,8vw,64px);font-weight:bold;color:rgba(190,35,35,.16);white-space:nowrap;pointer-events:none}
+.university-header{display:flex;align-items:center;justify-content:center;gap:15px;padding:5px 0 14px}
+.logo{width:85px;height:85px;object-fit:contain;flex-shrink:0}
+.university-name{border-left:2px solid #263f78;padding-left:15px;color:#073477;font-family:Georgia,serif;font-size:clamp(22px,4.5vw,34px);font-weight:bold;line-height:1.1}
+.navbar{background:#073477;height:38px;display:flex;align-items:center;padding-left:15px;border-radius:5px;margin:3px 0 15px}
+.menu{color:white;font-size:24px}
+.result-title{text-align:center;color:#073477;font-size:29px;margin:12px 0}
+.exam-title{text-align:center;font-size:clamp(14px,2.8vw,19px);line-height:1.35;margin:0 0 12px}
+.line{border-bottom:3px solid #173e7e;margin:12px 0 20px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+td,th{border:1px solid #c4ccda;padding:9px;text-align:left;vertical-align:middle}
+td:first-child{font-weight:bold;width:48%}
+.subject-section{display:grid;grid-template-columns:2fr 1.2fr;margin-top:22px;border:1px solid #c4ccda;break-inside:avoid;page-break-inside:avoid}
+.subject-table{border:none}
 .subject-table td:first-child{width:23%}
-
-.status{
-  border-left:1px solid #c4ccda;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:10px;
-}
-
-.status h2{
-  font-size:25px;
-  margin:5px 0 10px;
-  color:#10234b;
-}
-
-.hons-result{
-  font-size:14px;
-  font-weight:bold;
-  margin-top:5px;
-  line-height:1.3;
-}
-
-.footer{
-  text-align:center;
-  font-family:Arial,sans-serif;
-  font-style:normal;
-  font-size:12px;
-  font-weight:400;
-  margin:25px 0 5px;
-  color:#173e7e;
-}
-
-.action-buttons{
-  max-width:650px;
-  margin:12px auto 25px;
-  display:none;
-  gap:10px;
-}
-
-.action-buttons button{
-  margin:0;
-  flex:1;
-}
-
-.image-btn{background:#198754}
-.pdf-btn{background:#073477}
-
-/* MOBILE */
-
+.status{border-left:1px solid #c4ccda;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:10px}
+.status h2{font-size:25px;margin:5px 0 10px;color:#10234b}
+.hons-result{font-size:14px;font-weight:bold;margin-top:5px;line-height:1.3}
+.footer{text-align:center;font-family:Arial,sans-serif;font-style:normal;font-size:12px;font-weight:400;margin:25px 0 5px;color:#173e7e}
+.action-buttons{max-width:650px;margin:12px auto 25px;display:none;gap:10px}
+.action-buttons button{margin:0;flex:1}
+.image-btn{background:#198754}.pdf-btn{background:#073477}
 @media(max-width:600px){
-
-  body{padding:8px}
-
-  #result{
-    padding:10px;
-    margin:12px auto;
-  }
-
-  .university-header{gap:10px}
-
-  .logo{
-    width:72px;
-    height:72px;
-  }
-
-  .university-name{
-    padding-left:10px;
-    font-size:23px;
-  }
-
-  .navbar{
-    height:34px;
-    padding-left:12px;
-    margin-bottom:12px;
-  }
-
-  .menu{font-size:22px}
-
-  .result-title{
-    font-size:26px;
-    margin:10px 0;
-  }
-
-  .exam-title{font-size:14px}
-
-  .line{margin:10px 0 16px}
-
-  table{font-size:12px}
-
-  td,th{padding:7px 6px}
-
-  .subject-section{
-    grid-template-columns:1.6fr 1fr;
-    margin-top:17px;
-  }
-
-  .status{padding:6px}
-
-  .status h2{font-size:20px}
-
-  .hons-result{font-size:11px}
-
-  .footer{
-    font-size:11px;
-    margin:20px 0 5px;
-  }
+body{padding:8px}#result{padding:10px;margin:12px auto}
+.university-header{gap:10px}.logo{width:72px;height:72px}
+.university-name{padding-left:10px;font-size:23px}
+.navbar{height:34px;padding-left:12px;margin-bottom:12px}.menu{font-size:22px}
+.result-title{font-size:26px;margin:10px 0}.exam-title{font-size:14px}
+.line{margin:10px 0 16px}table{font-size:12px}td,th{padding:7px 6px}
+.subject-section{grid-template-columns:1.6fr 1fr;margin-top:17px}
+.status{padding:6px}.status h2{font-size:20px}.hons-result{font-size:11px}
+.footer{font-size:11px;margin:20px 0 5px}
 }
-
-/* PDF EXPORT */
-
 @media print{
-
-  @page{
-    size:A4 portrait;
-    margin:8mm;
-  }
-
-  body{
-    background:white;
-    padding:0;
-    margin:0;
-  }
-
-  .form-container,
-  .developer-credit,
-  .action-buttons{
-    display:none!important;
-  }
-
-  #result{
-    display:block!important;
-    width:100%;
-    max-width:none;
-    margin:0;
-    padding:5px;
-    border:0;
-    overflow:visible;
-    print-color-adjust:exact;
-    -webkit-print-color-adjust:exact;
-  }
-
-  .subject-section,
-  table,
-  .university-header,
-  .footer{
-    break-inside:avoid;
-    page-break-inside:avoid;
-  }
+@page{size:A4 portrait;margin:8mm}
+body{background:white;padding:0;margin:0}
+.form-container,.developer-credit,.action-buttons{display:none!important}
+#result{display:block!important;width:100%;max-width:none;margin:0;padding:5px;border:0;overflow:visible;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+.subject-section,table,.university-header,.footer{break-inside:avoid;page-break-inside:avoid}
 }
 </style>
 </head>
-
 <body>
-
 <div class="form-container">
-
-  <h1>SMU Result Card Generator</h1>
-
-  <label>College Name</label>
-
-  <select id="college">
-    <option value="">Select College</option>
-    <option>Sylhet MAG Osmani Medical College</option>
-    <option>Jalalabad Ragib Rabeya Medical College</option>
-    <option>Sylhet Women's Medical College</option>
-    <option>North East Medical College</option>
-    <option>Parkview Medical college</option>
-    <option>Habiganj Medical College</option>
-    <option>Sunamganj Medical College</option>
-  </select>
-
-  <label>Student's Name</label>
-  <input id="student" placeholder="Enter your name">
-
-  <label>Registration</label>
-  <input id="registration" placeholder="Enter registration number">
-
-  <label>Code No</label>
-  <input id="code" placeholder="Enter code number">
-
-  <label>Session</label>
-  <select id="session">
-    <option value="">Select Session</option>
-    <option value="">2021-2022</option>
-    <option value="">2022-2023</option>
-    <option value="">2023-2024</option>
-    <option value="">2024-2025</option>
-    <option value="">2025-2026</option>
-    <option value="">2026-2027</option>
-    <option value="">2027-2028</option>
-
-    
-  <label>Professional Examination</label>
- <select id="professional">
-    <option value="">Select Professional</option>
-    <option value="First">First Professional</option>
-    <option value="Second">Second Professional</option>
-    <option value="Third">Third Professional</option>
-    <option value="Final">Final Professional</option>
-  </select>
-
-  <label>Exam Month</label>
-
-  <select id="examMonth">
-    <option value="">Select Month</option>
-    <option value="May">May</option>
-    <option value="November">November</option>
-  </select>
-
-  <label>Exam Year</label>
-  <select id="examYear">
-    <option value="">Exam Year</option>
-    <option value="">2025</option>
-    <option value="">2026</option>
-    <option value="">2027</option>
-    <option value="">2028</option>
-  
-
-  <label>Hons Subjects</label>
-
-  <div class="hons-options" id="honsOptions">
-    <p>Select Professional first.</p>
-  </div>
-
-  <button onclick="generateResult()">
-    Generate Result Card
-  </button>
-
+<h1>SMU Result Card Generator</h1>
+<label>College Name</label>
+<select id="college">
+<option value="">Select College</option>
+<option>Sylhet MAG Osmani Medical College</option>
+<option>Jalalabad Ragib Rabeya Medical College</option>
+<option>Sylhet Women's Medical College</option>
+<option>North East Medical College</option>
+<option>Parkview Medical college</option>
+<option>Habiganj Medical College</option>
+<option>Sunamganj Medical College</option>
+</select>
+<label>Student's Name</label><input id="student" placeholder="Enter your name">
+<label>Registration</label><input id="registration" placeholder="Enter registration number">
+<label>Code No</label><input id="code" placeholder="Enter code number">
+<label>Session</label>
+<select id="session">
+<option value="">Select Session</option>
+<option>2021-2022</option><option>2022-2023</option><option>2023-2024</option><option>2024-2025</option><option>2025-2026</option><option>2026-2027</option><option>2027-2028</option>
+</select>
+<label>Professional Examination</label>
+<select id="professional">
+<option value="">Select Professional</option>
+<option value="First">First Professional</option><option value="Second">Second Professional</option><option value="Third">Third Professional</option><option value="Final">Final Professional</option>
+</select>
+<label>Exam Month</label>
+<select id="examMonth"><option value="">Select Month</option><option value="May">May</option><option value="November">November</option></select>
+<label>Exam Year</label>
+<select id="examYear"><option value="">Select Exam Year</option><option>2025</option><option>2026</option><option>2027</option><option>2028</option><option>2029</option><option>2030</option></select>
+<label>Hons Subjects</label>
+<div class="hons-options" id="honsOptions"><p>Select Professional first.</p></div>
+<button onclick="generateResult()">Generate Sample Card</button>
 </div>
-
-<div class="developer-credit">
-  <b>Developed by- Jubayed Islam, 63<sup>rd</sup> MBBS, SOMC</b>
-</div>
-
+<div class="developer-credit"><b>Developed by- Jubayed Islam, 63<sup>rd</sup> MBBS, SOMC</b></div>
 <div id="result">
-
-  <div class="university-header">
-
-    <img class="logo" src="smu-logo.jpg" alt="University logo">
-
-    <div class="university-name">
-      Sylhet Medical<br>University
-    </div>
-
-  </div>
-
-  <div class="navbar">
-    <div class="menu">☰</div>
-  </div>
-
-  <h1 class="result-title">Result</h1>
-
-  <h2 class="exam-title" id="rExamTitle"></h2>
-
-  <div class="line"></div>
-
-  <table>
-
-    <tr>
-      <td>College Name</td>
-      <td id="rCollege"></td>
-    </tr>
-
-    <tr>
-      <td>Student's Name</td>
-      <td id="rStudent"></td>
-    </tr>
-
-    <tr>
-      <td>Registration</td>
-      <td id="rRegistration"></td>
-    </tr>
-
-    <tr>
-      <td>Session</td>
-      <td id="rSession"></td>
-    </tr>
-
-    <tr>
-      <td>Programme</td>
-      <td>M.B.B.S.</td>
-    </tr>
-
-    <tr>
-      <td>Code No</td>
-      <td id="rCode"></td>
-    </tr>
-
-    <tr>
-      <td>Exam Year</td>
-      <td id="rYear"></td>
-    </tr>
-
-  </table>
-
-  <div class="subject-section">
-
-    <table class="subject-table" id="rSubjects">
-    </table>
-
-    <div class="status">
-
-      <h2>Passed</h2>
-
-      <div id="rHons" class="hons-result"></div>
-
-    </div>
-
-  </div>
-
-  <div class="footer">
-    Unofficial Result Card
-  </div>
-
+<div class="university-header"><img class="logo" src="smu-logo.jpg" alt="University logo"><div class="university-name">Sylhet Medical<br>University</div></div>
+<div class="navbar"><div class="menu">☰</div></div>
+<h1 class="result-title">Sample Result</h1>
+<h2 class="exam-title" id="rExamTitle"></h2><div class="line"></div>
+<table>
+<tr><td>College Name</td><td id="rCollege"></td></tr>
+<tr><td>Student's Name</td><td id="rStudent"></td></tr>
+<tr><td>Registration</td><td id="rRegistration"></td></tr>
+<tr><td>Session</td><td id="rSession"></td></tr>
+<tr><td>Programme</td><td>M.B.B.S.</td></tr>
+<tr><td>Code No</td><td id="rCode"></td></tr>
+<tr><td>Exam Year</td><td id="rYear"></td></tr>
+</table>
+<div class="subject-section"><table class="subject-table" id="rSubjects"></table><div class="status"><h2>Sample Status</h2><div id="rHons" class="hons-result"></div></div></div>
+<div class="footer">Unofficial Sample Card</div>
 </div>
-
-<div class="action-buttons" id="actionButtons">
-
-  <button class="image-btn" onclick="saveImage()">
-    Save as Image
-  </button>
-
-  <button class="pdf-btn" onclick="savePDF()">
-    Save as PDF
-  </button>
-
-</div>
-
+<div class="action-buttons" id="actionButtons"><button class="image-btn" onclick="saveImage()">Save as Image</button><button class="pdf-btn" onclick="savePDF()">Save as PDF</button></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-
 <script>
-
-/* SUBJECT DATA */
-
-const subjectData={
-
-  First:[
-    "Anatomy",
-    "Physiology",
-    "Biochemistry"
-  ],
-
-  Second:[
-    "Pharmacology and Therapeutics",
-    "Forensic Medicine and Toxicology"
-  ],
-
-  Third:[
-    "Community Medicine and Public Health",
-    "Pathology",
-    "Microbiology"
-  ],
-
-  Final:[
-    "Medicine",
-    "Surgery",
-    "Obstetrics and Gynaecology"
-  ]
-
-};
-
-/* DYNAMIC SUBJECTS */
-
-const professional=document.getElementById("professional");
-const honsOptions=document.getElementById("honsOptions");
-
+const subjectData={First:["Anatomy","Physiology","Biochemistry"],Second:["Pharmacology and Therapeutics","Forensic Medicine and Toxicology"],Third:["Community Medicine and Public Health","Pathology","Microbiology"],Final:["Medicine","Surgery","Obstetrics and Gynaecology"]};
+const professional=document.getElementById("professional"),honsOptions=document.getElementById("honsOptions");
 professional.addEventListener("change",function(){
-
-  const selectedProfessional=this.value;
-
-  honsOptions.innerHTML="";
-
-  if(!selectedProfessional){
-
-    honsOptions.innerHTML="<p>Select Professional first.</p>";
-
-    return;
-  }
-
-  const subjects=subjectData[selectedProfessional];
-
-  const noneLabel=document.createElement("label");
-
-  noneLabel.innerHTML=
-    '<input type="checkbox" name="hons" value="None" id="none"> None';
-
-  honsOptions.appendChild(noneLabel);
-
-  subjects.forEach(subject=>{
-
-    const label=document.createElement("label");
-
-    label.innerHTML=
-      `<input type="checkbox" name="hons" value="${subject}"> ${subject}`;
-
-    honsOptions.appendChild(label);
-
-  });
-
-  setupHonsLogic();
-
+honsOptions.innerHTML="";
+if(!this.value){honsOptions.innerHTML="<p>Select Professional first.</p>";return;}
+const noneLabel=document.createElement("label");
+noneLabel.innerHTML='<input type="checkbox" name="hons" value="None" id="none"> None';
+honsOptions.appendChild(noneLabel);
+subjectData[this.value].forEach(subject=>{const label=document.createElement("label");label.innerHTML=`<input type="checkbox" name="hons" value="${subject}"> ${subject}`;honsOptions.appendChild(label);});
+setupHonsLogic();
 });
-
-/* HONS LOGIC */
-
 function setupHonsLogic(){
-
-  const noneBox=document.getElementById("none");
-
-  const honsBoxes=document.querySelectorAll(
-    'input[name="hons"]'
-  );
-
-  honsBoxes.forEach(box=>{
-
-    box.addEventListener("change",()=>{
-
-      if(box.value==="None" && box.checked){
-
-        honsBoxes.forEach(other=>{
-
-          if(other!==noneBox){
-            other.checked=false;
-          }
-
-        });
-
-      }
-
-      if(box.value!=="None" && box.checked){
-
-        noneBox.checked=false;
-
-      }
-
-    });
-
-  });
-
+const noneBox=document.getElementById("none"),boxes=document.querySelectorAll('input[name="hons"]');
+boxes.forEach(box=>box.addEventListener("change",()=>{
+if(box.value==="None"&&box.checked)boxes.forEach(other=>{if(other!==noneBox)other.checked=false;});
+if(box.value!=="None"&&box.checked)noneBox.checked=false;
+}));
 }
-
-/* GENERATE RESULT */
-
 function generateResult(){
-
-  const college=document.getElementById("college").value;
-
-  const student=document.getElementById("student").value.trim();
-
-  const registration=document.getElementById("registration").value.trim();
-
-  const code=document.getElementById("code").value.trim();
-
-  const session=document.getElementById("session").value.trim();
-
-  const prof=document.getElementById("professional").value;
-
-  const month=document.getElementById("examMonth").value;
-
-  const year=document.getElementById("examYear").value.trim();
-
-  if(!college||!student||!registration||!code||!session||!prof||!month||!year){
-
-    alert("Please fill in all information!");
-
-    return;
-  }
-
-  const honsBoxes=document.querySelectorAll(
-    'input[name="hons"]'
-  );
-
-  const selected=[...honsBoxes]
-
-    .filter(box=>box.checked)
-
-    .map(box=>box.value);
-
-  if(selected.length===0){
-
-    alert("Please select Hons option or None.");
-
-    return;
-  }
-
-  /* STUDENT INFORMATION */
-
-  document.getElementById("rCollege").textContent=college;
-
-  document.getElementById("rStudent").textContent=student;
-
-  document.getElementById("rRegistration").textContent=registration;
-
-  document.getElementById("rCode").textContent=code;
-
-  document.getElementById("rSession").textContent=session;
-
-  document.getElementById("rYear").textContent=year;
-
-  /* EXAM TITLE */
-
-  const examTitle=
-    `${prof} Professional M.B.B.S. Examination of ${month} ${year} (New Curriculum)`;
-
-  document.getElementById("rExamTitle").textContent=examTitle;
-
-  /* SUBJECTS */
-
-  const subjects=subjectData[prof];
-
-  const subjectTable=document.getElementById("rSubjects");
-
-  subjectTable.innerHTML="";
-
-  const heading=document.createElement("tr");
-
-  const headingCell=document.createElement("td");
-
-  headingCell.colSpan=2;
-
-  headingCell.textContent="Name of the Subject/Subjects appearing at:";
-
-  heading.appendChild(headingCell);
-
-  subjectTable.appendChild(heading);
-
-  subjects.forEach((subject,index)=>{
-
-    const row=document.createElement("tr");
-
-    const numberCell=document.createElement("td");
-
-    numberCell.textContent=index+1;
-
-    const subjectCell=document.createElement("td");
-
-    subjectCell.textContent=subject;
-
-    row.appendChild(numberCell);
-
-    row.appendChild(subjectCell);
-
-    subjectTable.appendChild(row);
-
-  });
-
-  /* HONS INFORMATION */
-
-  const hons=selected.filter(item=>item!=="None");
-
-  const honsElement=document.getElementById("rHons");
-
-  if(hons.length===0){
-
-    honsElement.style.display="none";
-
-    honsElement.textContent="";
-
-  }else{
-
-    honsElement.style.display="block";
-
-    honsElement.textContent="Hons: "+hons.join(", ");
-
-  }
-
-  /* SHOW RESULT */
-
-  document.getElementById("result").style.display="block";
-
-  document.getElementById("actionButtons").style.display="flex";
-
-  document.getElementById("result").scrollIntoView({
-
-    behavior:"smooth",
-
-    block:"start"
-
-  });
-
+const college=document.getElementById("college").value,student=document.getElementById("student").value.trim(),registration=document.getElementById("registration").value.trim(),code=document.getElementById("code").value.trim(),session=document.getElementById("session").value,prof=professional.value,month=document.getElementById("examMonth").value,year=document.getElementById("examYear").value;
+if(!college||!student||!registration||!code||!session||!prof||!month||!year){alert("Please fill in all information!");return;}
+const selected=[...document.querySelectorAll('input[name="hons"]:checked')].map(b=>b.value);
+if(!selected.length){alert("Please select Hons option or None.");return;}
+document.getElementById("rCollege").textContent=college;
+document.getElementById("rStudent").textContent=student;
+document.getElementById("rRegistration").textContent=registration;
+document.getElementById("rCode").textContent=code;
+document.getElementById("rSession").textContent=session;
+document.getElementById("rYear").textContent=year;
+document.getElementById("rExamTitle").textContent=`${prof} Professional M.B.B.S. Examination of ${month} ${year} (New Curriculum)`;
+const table=document.getElementById("rSubjects");table.innerHTML="";
+const head=document.createElement("tr"),cell=document.createElement("td");cell.colSpan=2;cell.textContent="Name of the Subject/Subjects appearing at:";head.appendChild(cell);table.appendChild(head);
+subjectData[prof].forEach((subject,i)=>{const row=document.createElement("tr"),n=document.createElement("td"),s=document.createElement("td");n.textContent=i+1;s.textContent=subject;row.append(n,s);table.appendChild(row);});
+const hons=selected.filter(v=>v!=="None"),honsElement=document.getElementById("rHons");
+honsElement.textContent=hons.length?"Hons: "+hons.join(", "):"No Hons selected";honsElement.style.display="block";
+document.getElementById("result").style.display="block";document.getElementById("actionButtons").style.display="flex";document.getElementById("result").scrollIntoView({behavior:"smooth",block:"start"});
 }
-
-/* SAVE AS IMAGE */
-
 async function saveImage(){
-
-  const result=document.getElementById("result");
-
-  if(typeof html2canvas==="undefined"){
-
-    alert("Image library could not load. Please check your internet connection.");
-
-    return;
-  }
-
-  try{
-
-    const canvas=await html2canvas(result,{
-
-      scale:3,
-
-      backgroundColor:"#ffffff",
-
-      useCORS:true,
-
-      logging:false,
-
-      windowWidth:result.scrollWidth
-
-    });
-
-    const link=document.createElement("a");
-
-    link.download="SMU-Result-Card.png";
-
-    link.href=canvas.toDataURL("image/png");
-
-    link.click();
-
-  }catch(error){
-
-    alert("Unable to save image. Please try again.");
-
-    console.error(error);
-
-  }
-
+const result=document.getElementById("result");
+if(typeof html2canvas==="undefined"){alert("Image library could not load. Please check your internet connection.");return;}
+try{const canvas=await html2canvas(result,{scale:3,backgroundColor:"#ffffff",useCORS:true,logging:false,windowWidth:result.scrollWidth});const link=document.createElement("a");link.download="SMU-Sample-Card.png";link.href=canvas.toDataURL("image/png");link.click();}catch(error){alert("Unable to save image. Please try again.");console.error(error);}
 }
-
-/* SAVE AS PDF */
-
 async function savePDF(){
-
-  const result=document.getElementById("result");
-
-  if(typeof html2pdf==="undefined"){
-
-    alert("PDF library could not load. Please check your internet connection.");
-
-    return;
-  }
-
-  const options={
-
-    margin:[5,5,5,5],
-
-    filename:"SMU-Result-Card.pdf",
-
-    image:{
-      type:"jpeg",
-      quality:0.98
-    },
-
-    html2canvas:{
-      scale:2,
-      useCORS:true,
-      backgroundColor:"#ffffff",
-      logging:false
-    },
-
-    jsPDF:{
-      unit:"mm",
-      format:"a4",
-      orientation:"portrait"
-    },
-
-    pagebreak:{
-      mode:["avoid-all","css"]
-    }
-
-  };
-
-  try{
-
-    await html2pdf()
-      .set(options)
-      .from(result)
-      .save();
-
-  }catch(error){
-
-    alert("Unable to generate PDF. Please try again.");
-
-    console.error(error);
-
-  }
-
+const result=document.getElementById("result");
+if(typeof html2pdf==="undefined"){alert("PDF library could not load. Please check your internet connection.");return;}
+const options={margin:[5,5,5,5],filename:"SMU-Sample-Card.pdf",image:{type:"jpeg",quality:.98},html2canvas:{scale:2,useCORS:true,backgroundColor:"#ffffff",logging:false},jsPDF:{unit:"mm",format:"a4",orientation:"portrait"},pagebreak:{mode:["avoid-all","css"]}};
+try{await html2pdf().set(options).from(result).save();}catch(error){alert("Unable to generate PDF. Please try again.");console.error(error);}
 }
-
 </script>
-
 </body>
 </html>
