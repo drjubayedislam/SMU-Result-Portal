@@ -149,7 +149,8 @@ const table=document.getElementById("rSubjects");table.innerHTML="";
 const head=document.createElement("tr"),cell=document.createElement("td");cell.colSpan=2;cell.textContent="Name of the Subject/Subjects appearing at:";head.appendChild(cell);table.appendChild(head);
 subjectData[prof].forEach((subject,i)=>{const row=document.createElement("tr"),n=document.createElement("td"),s=document.createElement("td");n.textContent=i+1;s.textContent=subject;row.append(n,s);table.appendChild(row);});
 const hons=selected.filter(v=>v!=="None"),honsElement=document.getElementById("rHons");
-honsElement.textContent=hons.length?"Hons: "+hons.join(", "):"No Hons selected";honsElement.style.display="block";
+honsElement.textContent=hons.length?"Hons: "+hons.join(", "):"";
+honsElement.style.display=hons.length?"block":"none";
 document.getElementById("result").style.display="block";document.getElementById("actionButtons").style.display="flex";document.getElementById("result").scrollIntoView({behavior:"smooth",block:"start"});
 }
 async function saveImage(){
