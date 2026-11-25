@@ -93,14 +93,13 @@ body{background:white;padding:0;margin:0}
 <select id="examYear"><option value="">Select Exam Year</option><option>2025</option><option>2026</option><option>2027</option><option>2028</option><option>2029</option><option>2030</option></select>
 <label>Hons Subjects</label>
 <div class="hons-options" id="honsOptions"><p>Select Professional first.</p></div>
-<button onclick="generateResult()">Generate Sample Card</button>
+<button onclick="generateResult()">Generate Result Card</button>
 </div>
 <div class="developer-credit"><b>Developed by- Jubayed Islam, 63<sup>rd</sup> MBBS, SOMC</b></div>
 <div id="result">
 <div class="university-header"><img class="logo" src="smu-logo.jpg" alt="University logo"><div class="university-name">Sylhet Medical<br>University</div></div>
 <div class="navbar"><div class="menu">☰</div></div>
-<h1 class="result-title">Sample Result</h1>
-<h2 class="exam-title" id="rExamTitle"></h2><div class="line"></div>
+<h1 class="exam-title" id="rExamTitle"></h1><div class="line"></div>
 <table>
 <tr><td>College Name</td><td id="rCollege"></td></tr>
 <tr><td>Student's Name</td><td id="rStudent"></td></tr>
@@ -111,7 +110,7 @@ body{background:white;padding:0;margin:0}
 <tr><td>Exam Year</td><td id="rYear"></td></tr>
 </table>
 <div class="subject-section"><table class="subject-table" id="rSubjects"></table><div class="status"><h2>Sample Status</h2><div id="rHons" class="hons-result"></div></div></div>
-<div class="footer">Unofficial Sample Card</div>
+<div class="footer">Unofficial Result Card</div>
 </div>
 <div class="action-buttons" id="actionButtons"><button class="image-btn" onclick="saveImage()">Save as Image</button><button class="pdf-btn" onclick="savePDF()">Save as PDF</button></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
