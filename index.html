@@ -58,69 +58,70 @@ body{background:white;padding:0;margin:0}
 .subject-section,table,.university-header,.footer{break-inside:avoid;page-break-inside:avoid}
 }
 
-
 .portal-header{
     background:#1b3b70;
     color:white;
     text-align:center;
-    padding:20px 15px 40px;
-    border-bottom:8px solid #a69a76;
+    padding:15px 10px 30px;
+    border-bottom:7px solid #a69a76;
     margin:0;
 }
 
 .portal-header img{
-    width:145px;
-    height:145px;
+    width:115px;
+    height:115px;
     object-fit:contain;
     background:white;
     border-radius:50%;
-    padding:12px;
-    margin:20px auto 20px;
+    padding:9px;
+    margin:10px auto 15px;
     display:block;
 }
 
 .portal-header h1{
-    font-size:clamp(22px,4.5vw,36px);
+    font-size:clamp(18px,5vw,30px);
     font-weight:bold;
-    margin:0 0 18px;
+    margin:0 0 12px;
     color:white;
     line-height:1.2;
+    white-space:nowrap;
 }
 
 .portal-header p{
-    font-size:clamp(18px,3vw,28px);
+    font-size:clamp(16px,3vw,23px);
     margin:0;
     color:white;
 }
 
 .portal-warning{
     max-width:100%;
-    margin:22px auto 30px;
-    padding:20px 24px;
+    margin:18px auto 25px;
+    padding:18px 20px;
     background:#fff7d9;
     border:1px solid #e5d49a;
     border-radius:10px;
     color:#66551b;
-    font-size:17px;
+    font-size:16px;
     line-height:1.5;
 }
 
 @media(max-width:600px){
     .portal-header{
-        padding:20px 10px 40px;
+        padding:15px 5px 30px;
     }
 
     .portal-header img{
-        width:145px;
-        height:145px;
+        width:115px;
+        height:115px;
     }
 
     .portal-header h1{
-        font-size:26px;
+        font-size:clamp(17px,5vw,25px);
+        white-space:nowrap;
     }
 
     .portal-header p{
-        font-size:22px;
+        font-size:20px;
     }
 }
 </style>
